@@ -262,6 +262,9 @@
 
 ![시스템 아키텍처](assets/시스템아키텍처.png)
 
+서버 아키텍처
+![시스템아키텍처-Page-1 drawio (1)](https://github.com/user-attachments/assets/39473d50-2c87-4684-828a-a7afbfdc921e)
+
 > 주요 아키텍처
 
 - **MySQL & MongoDB**
