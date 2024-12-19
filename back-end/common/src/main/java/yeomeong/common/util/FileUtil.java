@@ -4,14 +4,6 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-
-import marvin.image.MarvinImage;
-import org.marvinproject.image.transform.scale.Scale;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,8 +14,30 @@ import yeomeong.common.exception.ErrorCode;
 @Component
 public class FileUtil {
 
-    private static String convertFileName(MultipartFile file) throws Exception {
-        if(file.isEmpty()) throw new Exception("파일이 비어 있습니다");
+    public static String uploadFileToS3(AmazonS3 s3Client,String bucketName, MultipartFile file) {
+        if (file.isEmpty()) {
+            throw new CustomException(ErrorCode.EMPTY_FILE);
+        }
+
+        String fileName = "";
+        try {
+            fileName = FileUtil.generateFileName(file);
+
+            ObjectMetadata metadata = new ObjectMetadata();
+            metadata.setContentLength(file.getSize());
+            metadata.setContentType(file.getContentType());
+
+            s3Client.putObject(new PutObjectRequest(bucketName,
+                    fileName, file.getInputStream(), metadata));
+        } catch (Exception e) {
+            throw new CustomException(ErrorCode.S3_UPLOAD_FAILED);
+        }
+
+        return fileName;
+    }
+
+    private static String generateFileName(MultipartFile file) {
+
 
         String fileExtension = "";
         String originalFileName = file.getOriginalFilename();
@@ -35,29 +49,9 @@ public class FileUtil {
         return UUID.randomUUID() + fileExtension;
     }
 
-    public static String uploadFileToS3( AmazonS3 s3Client,String bucketName, MultipartFile file) {
-        if (file == null) {
-            return null;
-        }
 
-        String fileName = null;
-        try {
-            fileName = FileUtil.convertFileName(file);
 
-            ObjectMetadata metadata = new ObjectMetadata();
-            metadata.setContentLength(file.getSize());
-            metadata.setContentType(file.getContentType());
-
-            s3Client.putObject(new PutObjectRequest(bucketName,
-                     fileName, file.getInputStream(), metadata));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        return fileName;
-    }
-
-    public static String uploadOriginalAndThumbnailToS3(AmazonS3 s3Client, String bucketName, MultipartFile file) throws Exception {
+    public static String uploadOriginalAndThumbnailToS3(AmazonS3 s3Client, String bucketName, MultipartFile file)  {
         if(file == null) return null;
 
         String fileName = uploadFileToS3(s3Client, bucketName, file);
