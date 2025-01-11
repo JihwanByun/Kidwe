@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class BanChangeRequestDto {
 
-    Long id;
-    Long banId;
+    private Long id;
+    private Long banId;
 
 }
