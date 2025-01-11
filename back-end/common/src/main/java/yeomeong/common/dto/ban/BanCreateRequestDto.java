@@ -7,8 +7,8 @@ import yeomeong.common.entity.kindergarten.Kindergarten;
 @Getter
 public class BanCreateRequestDto {
 
-    Long kindergartenId;
-    String name;
+    private Long kindergartenId;
+    private String name;
 
     public static Ban toBanEntity(Kindergarten kindergarten, BanCreateRequestDto banCreateRequestDto) {
         return Ban.builder()
