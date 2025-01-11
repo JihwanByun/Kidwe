@@ -8,9 +8,9 @@ import yeomeong.common.entity.member.Kid;
 @Getter
 public class KidBasicInfoResponseDto {
 
-    long id;
-    String name;
-    String image;
+    private long id;
+    private String name;
+    private String image;
 
     public static KidBasicInfoResponseDto toKidBasicInfoDto(Kid kid) {
         return KidBasicInfoResponseDto.builder()
