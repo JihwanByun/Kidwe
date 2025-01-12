@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 public class NotificationDeleteRequestDto {
 
-    List<Long> notificationIds;
+	private final List<Long> notificationIds;
 
 }
