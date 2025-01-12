@@ -8,7 +8,7 @@ import yeomeong.common.entity.member.Member;
 @Builder
 public class TeacherBasicInfoResponseDto {
 
-		private final long id;
+	private final long id;
     private final String name;
     private final String tel;
 
