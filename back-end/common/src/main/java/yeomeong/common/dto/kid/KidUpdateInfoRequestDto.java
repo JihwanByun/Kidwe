@@ -9,13 +9,13 @@ import yeomeong.common.entity.member.gtype;
 @Getter
 public class KidUpdateInfoRequestDto {
 
-    long id;
-    String name;
-    LocalDate birthday;
-    gtype gender;
-    List<String> allergies;
-    Long banId;
-    Long kindergartenId;
+		private final long id;
+    private final String name;
+    private final LocalDate birthday;
+    private final gtype gender;
+    private final List<String> allergies;
+    private final Long banId;
+    private final Long kindergartenId;
 
     public boolean hasBanId() {
         return this.banId != null;
