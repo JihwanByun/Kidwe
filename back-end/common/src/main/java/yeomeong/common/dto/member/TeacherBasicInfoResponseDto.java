@@ -8,9 +8,9 @@ import yeomeong.common.entity.member.Member;
 @Builder
 public class TeacherBasicInfoResponseDto {
 
-    long id;
-    String name;
-    String tel;
+		private final long id;
+    private final String name;
+    private final String tel;
 
     public static TeacherBasicInfoResponseDto toTeacherInfoDto(Member member) {
         return TeacherBasicInfoResponseDto.builder()
