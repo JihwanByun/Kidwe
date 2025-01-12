@@ -9,7 +9,7 @@ import yeomeong.common.entity.member.gtype;
 @Getter
 public class KidUpdateInfoRequestDto {
 
-		private final long id;
+	private final long id;
     private final String name;
     private final LocalDate birthday;
     private final gtype gender;
