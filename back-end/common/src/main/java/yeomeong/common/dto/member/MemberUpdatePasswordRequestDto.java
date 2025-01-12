@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class MemberUpdatePasswordRequestDto {
 
-    Long id;
-    String password;
+    private final Long id;
+    private final String password;
 
 }
