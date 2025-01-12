@@ -5,9 +5,9 @@ import lombok.Getter;
 @Getter
 public class MemberUpdateRequestDto {
 
-    Long id;
-    String name;
-    String tel;
-    String password;
+		private final Long id;
+    private final String name;
+    private final String tel;
+    private final String password;
 
 }
