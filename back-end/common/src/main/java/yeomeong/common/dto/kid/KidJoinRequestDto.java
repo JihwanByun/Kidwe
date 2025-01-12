@@ -14,13 +14,13 @@ import yeomeong.common.entity.member.gtype;
 @ToString
 public class KidJoinRequestDto {
 
-    String name;
-    LocalDate birthday;
-    gtype gender;
-    List<String> allergies;
-    String picture;
-    Long kindergartenId;
-    Long banId;
+	private String name;
+    private LocalDate birthday;
+    private gtype gender;
+    private List<String> allergies;
+    private String picture;
+    private Long kindergartenId;
+    private Long banId;
 
     public static Kid toKidEntity(KidJoinRequestDto kidJoinRequestDto,
         Kindergarten kindergarten, Ban ban) {
