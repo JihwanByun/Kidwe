@@ -6,11 +6,10 @@ import lombok.NoArgsConstructor;
 import yeomeong.common.entity.member.Kid;
 
 @Getter
-@NoArgsConstructor
 public class KidSummaryResponseDto {
-    private Long id;
-    private String name;
-    private String picture;
+    private final Long id;
+    private final String name;
+    private final String picture;
 
     public KidSummaryResponseDto(Kid kid){
         this.id = kid.getId();

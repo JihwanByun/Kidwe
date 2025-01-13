@@ -3,6 +3,7 @@ package yeomeong.common.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +45,7 @@ public class AnnouncementController {
     @Operation(summary = "공지사항 투표를 생성합니다.", description = "공지사항 id와 투표형식을 받아옵니다. 공지사항이 먼저 작성된 후 투표를 작성할 수 있습니다.")
     public ResponseEntity<VoteCreateDto> createVote(
             @PathVariable ("announcementId") Long announcement_id,
-            @RequestBody VoteCreateDto voteCreateDto){
+            @RequestBody @Valid VoteCreateDto voteCreateDto){
 
         voteService.createVote(announcement_id, voteCreateDto);
 

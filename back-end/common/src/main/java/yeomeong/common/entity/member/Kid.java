@@ -63,10 +63,10 @@ public class Kid {
     private Boolean isDeleted;
 
     public void updateFromDto(KidUpdateInfoRequestDto dto, String picture) {
-        this.name = dto.getName() != null ? dto.getName() : this.name;
-        this.birthday = dto.getBirthday() != null ? dto.getBirthday() : this.birthday;
-        this.gender = dto.getGender() != null ? dto.getGender() : this.gender;
-        this.allergies = dto.getAllergies() != null ? listToString(dto.getAllergies()) : this.allergies;
+        this.name = dto.name() != null ? dto.name() : this.name;
+        this.birthday = dto.birthday() != null ? dto.birthday() : this.birthday;
+        this.gender = dto.gender() != null ? dto.gender() : this.gender;
+        this.allergies = dto.allergies() != null ? listToString(dto.allergies()) : this.allergies;
         this.picture = picture != null ? picture : this.picture;
     }
 

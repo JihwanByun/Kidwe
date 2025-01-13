@@ -50,14 +50,12 @@ public class BanService {
     }
 
     public BanDetailInfoResponseDto getBanInfo(Long banId) {
+
         List<Member> teachers = memberRepository.findMemberByBanId(banId);
-        BanDetailInfoResponseDto banDetailInfoDto = BanDetailInfoResponseDto.toBanDetailInfoDto(
-            banRepository.findById(banId).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID)));
         List<TeacherBasicInfoResponseDto> teacherBasicInfos = new ArrayList<>();
         for(Member teacher : teachers) {
             teacherBasicInfos.add(TeacherBasicInfoResponseDto.toTeacherInfoDto(teacher));
         }
-        banDetailInfoDto.initializeDefaults(teacherBasicInfos);
         return banDetailInfoDto;
     }
 
@@ -68,13 +66,13 @@ public class BanService {
     }
 
     public void updateTeachersBan(BanChangeRequestDto banChangeRequestDto) {
-        memberRepository.updateMemberBan(banChangeRequestDto.getId(),
-            banRepository.findById(banChangeRequestDto.getBanId()).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID)));
+        memberRepository.updateMemberBan(banChangeRequestDto.id(),
+            banRepository.findById(banChangeRequestDto.banId()).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID)));
     }
 
     public void updateKidsBan(BanChangeRequestDto banChangeRequestDto) {
-        kidRepository.updateKidBan(banChangeRequestDto.getId(),
-            banRepository.findById(banChangeRequestDto.getBanId()).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID)));
+        kidRepository.updateKidBan(banChangeRequestDto.id(),
+            banRepository.findById(banChangeRequestDto.banId()).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID)));
     }
 
 }

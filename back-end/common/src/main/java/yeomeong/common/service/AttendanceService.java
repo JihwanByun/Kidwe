@@ -51,9 +51,9 @@ public class AttendanceService {
             throw new CustomException(ErrorCode.INVALID_INPUT_VALUE);
         }
         try {
-            LocalDate localDate = LocalDate.of(changeRequestDto.getYear(), changeRequestDto.getMonth(), changeRequestDto.getDay());
-            for (Long kidId : changeRequestDto.getKidIds()) {
-                if(attendanceRepository.updateKidsAttendanceState(kidId, localDate, changeRequestDto.getAttendedToday()) != 1) {
+            LocalDate localDate = LocalDate.of(changeRequestDto.year(), changeRequestDto.month(), changeRequestDto.day());
+            for (Long kidId : changeRequestDto.kidIds()) {
+                if(attendanceRepository.updateKidsAttendanceState(kidId, localDate, changeRequestDto.attendedToday()) != 1) {
                     throw new CustomException(ErrorCode.UPDATE_FAILED);
                 }
             }
@@ -72,9 +72,9 @@ public class AttendanceService {
         }
         try {
             if(attendanceRepository.updateKidsAttendanceReason(
-                changeRequestDto.getKidIds().get(0),
-                LocalDate.of(changeRequestDto.getYear(), changeRequestDto.getMonth(), changeRequestDto.getDay()),
-                changeRequestDto.getReason()) != 1) {
+                changeRequestDto.kidIds().get(0),
+                LocalDate.of(changeRequestDto.year(), changeRequestDto.month(), changeRequestDto.day()),
+                changeRequestDto.reason()) != 1) {
                 throw new CustomException(ErrorCode.NO_CHANGES_DETECTED);
             }
         } catch (DateTimeException e) {
