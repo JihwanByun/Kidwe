@@ -46,14 +46,14 @@ public class KidService {
         if (picture != null && !picture.isEmpty()) {
             pictureName = FileUtil.uploadFileToS3(amazonS3, bucketName, picture);
         }
-        Kid kid = kidRepository.findByIdAndIsDeletedFalse(kidUpdateInfoRequestDto.getId()).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_KID));
+        Kid kid = kidRepository.findByIdAndIsDeletedFalse(kidUpdateInfoRequestDto.id()).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_KID));
         kid.updateFromDto(kidUpdateInfoRequestDto, pictureName);
         if (kidUpdateInfoRequestDto.hasBanId()) {
-            kid.setNewBan(banRepository.findById(kidUpdateInfoRequestDto.getBanId())
+            kid.setNewBan(banRepository.findById(kidUpdateInfoRequestDto.banId())
                 .orElseThrow(() -> new CustomException(ErrorCode.INVALID_BAN_ID)));
         }
         if (kidUpdateInfoRequestDto.hasKindergartenId()) {
-            kid.setNewKindergarten(kindergartenRepository.findById(kidUpdateInfoRequestDto.getKindergartenId())
+            kid.setNewKindergarten(kindergartenRepository.findById(kidUpdateInfoRequestDto.kindergartenId())
                 .orElseThrow(() -> new CustomException(ErrorCode.INVALID_BAN_ID)));
         }
         kidRepository.save(kid);
